@@ -1,0 +1,15 @@
+language: csharp
+sudo: false
+mono:
+  - latest
+os:
+  - linux
+install:
+  - curl -L -o ./packages/NUnit.Framework-3.7.1.zip https://github.com/nunit/nunit/releases/download/3.7.1/NUnit.Framework-3.7.1.zip
+  - unzip ./packages/NUnit.Framework-3.7.1.zip
+script:
+  - mcs -out:main.exe src/Main.cs src/util/*.cs src/service/*.cs
+  - mono main.exe
+  - mcs -out:test.dll -t:library -r:./bin/net-4.5/nunit.framework.dll src/test/RandomGeneratorServiceTest.cs src/util/*.cs src/service/*.cs
+  - mono ./bin/net-4.5/nunitlite-runner.exe test.dll
+

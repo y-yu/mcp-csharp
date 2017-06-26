@@ -1,0 +1,7 @@
+packages/*
+!packages/.gitkeep
+*.exe
+*.dll
+*~
+TestResult.xml
+bin
